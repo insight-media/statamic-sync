@@ -16,7 +16,7 @@ The package requires an SSH connection to your webserver.
 You can install the package via composer:
 
 ```bash
-composer require insight-media/statamic-sync
+composer require --dev insight-media/statamic-sync
 ```
 
 You can optionally publish the config file with:
