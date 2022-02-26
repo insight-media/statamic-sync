@@ -1,74 +1,43 @@
-# :package_description
+<br>
+<img src="https://www.insight-media.be/images/logo.svg" height="80">
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/run-tests?label=tests)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/Check%20&%20fix%20styling?label=code%20style)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+# A console command to keep your local Statamic project in sync with the production version.
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/insight-media/statamic-sync.svg?style=flat-square)](https://packagist.org/packages/insight-media/statamic-sync)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/insight-media/statamic-sync/Check%20&%20fix%20styling?label=code%20style)](https://github.com/insight-media/statamic-sync/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/insight-media/statamic-sync.svg?style=flat-square)](https://packagist.org/packages/insight-media/statamic-sync)
 
-## Support us
+This package for Statamic projects provides a console command to pull the CMS content from your production version into your local version.
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+The package requires an SSH connection to your webserver.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require insight-media/statamic-sync
 ```
 
-You can publish and run the migrations with:
+You can optionally publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
+php artisan vendor:publish --tag="statamic-sync-config"
 ```
 
-You can publish the config file with:
+Add and edit the following env variables:
 
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
+```code
+SSH_USER=user
+SSH_HOST=yourproject.com
+SSH_PORT=22
+SSH_PATH=/var/www/project
 ```
 
 ## Usage
 
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
-```
-
-## Testing
-
 ```bash
-composer test
+php artisan statamic:sync
 ```
 
 ## Changelog
@@ -85,7 +54,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Insight Media](https://github.com/insight-media)
 - [All Contributors](../../contributors)
 
 ## License
