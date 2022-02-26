@@ -3,7 +3,7 @@
 
 # A console command to keep your local Statamic project in sync with the production version.
 
-[![Latest Version on Packagist](https://img.shields.io/badge/packagist-v1.0.0-blue](https://packagist.org/p2/insight-media/statamic-sync)
+[![Latest Version on Packagist](https://img.shields.io/badge/packagist-v1.0.0-blue)](https://packagist.org/p2/insight-media/statamic-sync)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/insight-media/statamic-sync/Check%20&%20fix%20styling?label=code%20style)](https://github.com/insight-media/statamic-sync/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/insight-media/statamic-sync.svg?style=flat-square)](https://packagist.org/packages/insight-media/statamic-sync)
 
