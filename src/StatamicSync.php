@@ -27,11 +27,7 @@ class StatamicSync
             $process = $ssh->download(self::$remotePath.DIRECTORY_SEPARATOR.$dir, base_path($dir));
         });
 
-        if ($process->isSuccessful())
-        {
-            self::deleteBackup();
-        }
-        else
+        if (!$process->isSuccessful())
         {
             throw new \Exception(!empty($process->getOutput()) ? $process->getOutput() : "Something went wrong!");
         }
@@ -70,11 +66,6 @@ class StatamicSync
             @mkdir($backupPath.$path, null, true);
             @rename(base_path($path), $backupPath.$path);
         });
-    }
-
-    private static function deleteBackup(): void
-    {
-        rmdir(self::backupPath());
     }
 
     private static function backupPath(): string
