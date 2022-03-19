@@ -23,8 +23,7 @@ class StatamicSync
         self::backup($paths);
 
         $paths->each(function($dir) use (&$ssh, &$process) {
-            if (!file_exists(base_path($dir))) mkdir(base_path($dir));
-            $process = $ssh->download(self::$remotePath.DIRECTORY_SEPARATOR.$dir, base_path($dir));
+            $process = $ssh->download(self::$remotePath.DIRECTORY_SEPARATOR.$dir, dirname(base_path($dir)));
         });
 
         if (!$process->isSuccessful())
