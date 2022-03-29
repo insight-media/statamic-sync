@@ -17,19 +17,25 @@ class StatamicSync
 
         $paths = collect(config('statamic-sync.paths'));
 
-        $ssh->addExtraOption('-r');
-        $process = null;
-
         self::backup($paths);
 
-        $paths->each(function($dir) use (&$ssh, &$process) {
-            $process = $ssh->download(self::$remotePath.DIRECTORY_SEPARATOR.$dir, dirname(base_path($dir)));
+        $paths->each(function($dir) use (&$ssh) {
+            $sourcePath = self::$remotePath.DIRECTORY_SEPARATOR.$dir;
+            $destinationPath = dirname(base_path($dir));
+            $process = $ssh->download($sourcePath, $destinationPath);
+
+            echo "\n".$ssh->getDownloadCommand($sourcePath, $destinationPath);
+
+            if ($process->isSuccessful())
+            {
+                echo " --> OK";
+            }
+            else
+            {
+                throw new \Exception(!empty($process->getOutput()) ? $process->getOutput() : " --> Something went wrong!");
+            }
         });
 
-        if (!$process->isSuccessful())
-        {
-            throw new \Exception(!empty($process->getOutput()) ? $process->getOutput() : "Something went wrong!");
-        }
     }
 
     private static function connection(): Ssh
@@ -39,16 +45,14 @@ class StatamicSync
 
             $user = config('statamic-sync.ssh.user');
             $host = config('statamic-sync.ssh.host');
-            $port = config('statamic-sync.ssh.port');
             $path = config('statamic-sync.ssh.path');
 
             if (empty($user) || empty($host) || empty($path)) throw new \Exception('Missing required config settings (user, host or path)');
 
             self::$ssh = Ssh::create(
                 $user,
-                $host,
-                $port
-            )->onOutput(function($type, $line) { echo $line; });
+                $host
+            )->onOutput(function($type, $line) { echo "\n".$line; })->enableQuietMode();
 
             self::$remotePath = $path;
         }
