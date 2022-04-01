@@ -18,8 +18,8 @@
     "require": {
         "php": "^8.0",
         "spatie/laravel-package-tools": "^1.9.2",
-        "spatie/ssh": "1.7",
-        "illuminate/contracts": "^8.0"
+        "spatie/ssh": "1.7.2",
+        "illuminate/contracts": "^9.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^6.0"
